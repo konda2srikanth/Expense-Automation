@@ -23,11 +23,15 @@ fi
 
 COLOR installing $COMPONENT
 dnf install mysql-server -y &>> LOG
+stat $?
 COLOR Enabling $COMPONENT
 systemctl enable mysqld     &>> LOG
+stat $?
 COLOR Starting $COMPONENT
 systemctl start  mysqld     &>> LOG
+stat $?
 COLOR Configuring  $COMPONENT Root password
 mysql_secure_installation --set-root-pass ExpenseApp@1  &>> LOG
+stat $?
 
 echo -e "\e\t ** $COMPONENT  Installation Complated **"
