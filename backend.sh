@@ -15,9 +15,13 @@ stat $?
 COLOR installing  nodejs20 version
 dnf install nodejs -y  &>> LOG
 stat $?
+id $APPUSER &>> LOG
+if [ $? -ne 0 ] ; then 
 COLOR Creating  $APPUSER Service Accuont
 useradd expense  
 stat $?
+fi
+
 COLOR Cleanup of old  content
 rm -rf /app &>> LOG
 stat $?
