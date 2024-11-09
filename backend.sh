@@ -3,6 +3,7 @@
 ID=$(id -u)
 LOG="/tmp/backend.log"
 COMPONENT="backend"
+ROOTPASS=$1
 APPUSER="expense"
 source comman.sh
 
@@ -51,7 +52,7 @@ COLOR Installing mysql client
 dnf install mysql-server -y  &>> LOG
 stat $?
 COLOR   Injecting Scheme To Myssql  DB
-mysql -h 3.86.60.41 -uroot -pExpenseApp@1 < /app/schema/backend.sql 
+mysql -h 3.86.60.41 -uroot -p$ROOTPASS < /app/schema/backend.sql 
 stat $?
 
 COLOR Starting $COMPONENT
