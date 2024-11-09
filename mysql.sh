@@ -3,12 +3,13 @@
 ID=$(id -u)
 LOG="/tmp/mysql.log"
 COMPONENT="Mysql"
+ROOTPASS=$1
 stat() {
     if [ $1 -eq 0 ] ; then 
     echo -e "\e[35m - Success \e[0m"
 else
     echo -e "\e[35m - Failure \e[0m"
-    exit 1
+    exit 2
 fi
 }
 
@@ -31,7 +32,7 @@ COLOR Starting $COMPONENT
 systemctl start  mysqld     &>> LOG
 stat $?
 COLOR Configuring  $COMPONENT Root password
-mysql_secure_installation --set-root-pass ExpenseApp@1  &>> LOG
+mysql_secure_installation --set-root-pass $ROOTPASS  
 stat $?
 
 echo -e "** $COMPONENT Installation Complated **"
