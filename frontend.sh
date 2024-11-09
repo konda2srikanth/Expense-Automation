@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ID=$(id -u)
+LOG="/tmp/frontend.log"
 
 stat() {
     if [ $1 -eq 0 ] ; then 
@@ -20,7 +21,7 @@ if [ "$ID" -ne 0 ]; then
 fi
 
 COLOR Installing Nginx
-dnf install nginx -y   &>> /tmp/frontend.log
+dnf install nginx -y   &>> LOG
 stat $?
 
 COLOR Copying Proxy file 
@@ -28,24 +29,24 @@ cp proxy.conf /etc/nginx/default.d/expense.conf
 stat $?
 
 COLOR Enabling Nginx 
-systemctl enable nginx  &>> /tmp/frontend.log
+systemctl enable nginx  &>> LOG
 stat $?
 
 COLOR Performing Cleanup 
-rm -rf /usr/share/nginx/html/*  &>> /tmp/frontend.log
+rm -rf /usr/share/nginx/html/*  &>> LOG
 stat $?
 
 COLOR Downloading Frontend 
-curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip &>> /tmp/frontend.log
-cd /usr/share/nginx/html  &>> /tmp/frontend.log
+curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip &>> LOG
+cd /usr/share/nginx/html  &>> LOG
 stat $?
 
 COLOR Extracting Frontend 
-unzip /tmp/frontend.zip  &>> /tmp/frontend.log
+unzip /tmp/frontend.zip  &>> LOG
 stat $?
 
 COLOR starting Frontend 
-systemctl restart nginx  &>> /tmp/frontend.log
+systemctl restart nginx  &>> LOG
 stat $?
 
 echo "** Frontend installation  Is complated **"
