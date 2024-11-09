@@ -10,38 +10,41 @@ else
 fi
 }
 
+COLOR(){
+    echo -e "\e[35m $* \e[0m"
+}
 if [ "$ID" -ne 0 ]; then
     echo -e "\e[31m Script is expected  to be  excuted as root user or with sudo scriptname.sh \e[0m"
     echo -e "\t sudo bash $0"
     exit 1
 fi
 
-echo -e "\e[31m installing Nginx \e[0m"
+COLOR Installing Nginx
 dnf install nginx -y   &>> /tmp/frontend.log
 stat $?
 
-echo  -e "\e[31m Copying Proxy file \e[0m"
+COLOR Copying Proxy file 
 cp proxy.conf /etc/nginx/default.d/expense.conf    
 stat $?
 
-echo -e "\e[31m Enabling Nginx \e[0m"
+COLOR Enabling Nginx 
 systemctl enable nginx  &>> /tmp/frontend.log
 stat $?
 
-echo -e "\e[31m Performing Cleanup \e[0m"
+COLOR Performing Cleanup 
 rm -rf /usr/share/nginx/html/*  &>> /tmp/frontend.log
 stat $?
 
-echo -e "\e[31m Downloading Frontend \e[0m"
+COLOR Downloading Frontend 
 curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip &>> /tmp/frontend.log
 cd /usr/share/nginx/html  &>> /tmp/frontend.log
 stat $?
 
-echo -e "\e[31m Extracting Frontend \e[0m"
+COLOR Extracting Frontend 
 unzip /tmp/frontend.zip  &>> /tmp/frontend.log
 stat $?
 
-echo -e "\e[31m starting Frontend \e[0m"
+COLOR starting Frontend 
 systemctl restart nginx  &>> /tmp/frontend.log
 stat $?
 
