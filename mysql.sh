@@ -32,7 +32,7 @@ COLOR Starting $COMPONENT
 systemctl start  mysqld     &>> LOG
 stat $?
 COLOR Configuring  $COMPONENT Root password
-mysql_secure_installation --set-root-pass $ROOTPASS  
+mysql_secure_installation --set-root-pass $ROOTPASS   &>> LOG
 stat $?
 
 echo -e "** $COMPONENT Installation Complated **"
