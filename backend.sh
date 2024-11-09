@@ -33,7 +33,7 @@ stat $?
 
 COLOR Extracting $COMPONENT
 cd /app  
-unzip -o /tmp/backend.zip  c
+unzip -o /tmp/backend.zip   &>> LOG
 stat $?
 
 COLOR Genarating Artifacts
