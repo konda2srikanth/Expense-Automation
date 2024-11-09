@@ -29,15 +29,15 @@ stat $?
 mkdir /app   &>> LOG
 stat $?
 COLOR Downloading  $COMPONENT
-curl -o /tmp/backend.zip https://expense-web-app.s3.amazonaws.com/backend.zip   &>> LOG 
+curl -o /tmp/$COMPONENT.zip https://expense-web-app.s3.amazonaws.com/$COMPONENT.zip   &>> LOG 
 stat $?
-COLOR configuring  backend service
-cp backend.service  /etc/systemd/system/backend.service  
+COLOR configuring  $COMPONENT service
+cp $COMPONENT.service  /etc/systemd/system/$COMPONENT.service  
 stat $?
 
 COLOR Extracting $COMPONENT
 cd /app  
-unzip -o /tmp/backend.zip   &>> LOG
+unzip -o /tmp/$COMPONENT.zip   &>> LOG
 stat $?
 
 COLOR Genarating Artifacts
@@ -45,7 +45,7 @@ npm install  &>> LOG
 stat $?
 COLOR Defining Permissions To $APPUSER
 chmod -R 775 /app
-chown -R expense:expense /app
+chown -R $APPUSER:$APPUSER /app
 stat $?
 COLOR Installing mysql client 
 dnf install mysql-server -y  &>> LOG
