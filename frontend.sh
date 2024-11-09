@@ -2,12 +2,12 @@
 
 ID=$(id -u)
 LOG="/tmp/frontend.log"
-
+COMPONENT="frontend"
 stat() {
     if [ $1 -eq 0 ] ; then 
     echo -e "\e[35m - Success \e[0m"
 else
-    echo -e "\e[35m - SFailure \e[0m"
+    echo -e "\e[35m - Failure \e[0m"
 fi
 }
 
@@ -36,17 +36,17 @@ COLOR Performing Cleanup
 rm -rf /usr/share/nginx/html/*  &>> LOG
 stat $?
 
-COLOR Downloading Frontend 
-curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip &>> LOG
+COLOR Downloading $COMPONENT 
+curl -o /tmp/$COMPONENT.zip https://expense-web-app.s3.amazonaws.com/$COMPONENT.zip &>> LOG
 cd /usr/share/nginx/html  &>> LOG
 stat $?
 
-COLOR Extracting Frontend 
-unzip /tmp/frontend.zip  &>> LOG
+COLOR Extracting $COMPONENT 
+unzip /tmp/$COMPONENT.zip  &>> LOG
 stat $?
 
-COLOR starting Frontend 
+COLOR starting $COMPONENT  
 systemctl restart nginx  &>> LOG
 stat $?
 
-echo "** Frontend installation  Is complated **"
+echo "** COMPONENT installation  Is complated **"
