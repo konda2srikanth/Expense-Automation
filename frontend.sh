@@ -2,7 +2,7 @@
 
 ID=$(id -u)
 
-if [ "$ID" -ne 0]; then
+if [ "$ID" -ne 0 ]; then
     echo -e "\e[31m Script is expected  to be  excuted as root user or with sudo scriptname.sh \e[0m"
     echo -e "\t sudo bash $0"
     exit 1
