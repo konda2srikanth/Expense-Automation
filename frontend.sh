@@ -7,19 +7,27 @@ if [ "$ID" -ne 0 ]; then
     echo -e "\t sudo bash $0"
     exit 1
 fi
-echo "installing Nginx"
-dnf install nginx -y  
-echo "Copying Proxy file"
-cp proxy.conf /etc/nginx/default.d/expense.conf
-echo "Enabling Nginx"
-systemctl enable nginx 
-echo "Performing Cleanup"
-rm -rf /usr/share/nginx/html/*  
-echo "Downloading Frontend"
-curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip
-cd /usr/share/nginx/html 
-echo "Extracting Frontend"
-unzip /tmp/frontend.zip
-echo "starting Frontend"
-systemctl restart nginx 
+
+echo -e "\e[31m installing Nginx \e[0m"
+dnf install nginx -y   &>> /tmp/frontend.log
+
+echo  -e "\e[31m Copying Proxy file \e[0m"
+cp proxy.conf /etc/nginx/default.d/expense.conf    
+
+echo -e "\e[31m Enabling Nginx \e[0m"
+systemctl enable nginx  &>> /tmp/frontend.log
+
+echo -e "\e[31m Performing Cleanup \e[0m"
+rm -rf /usr/share/nginx/html/*  &>> /tmp/frontend.log
+
+echo -e "\e[31m Downloading Frontend \e[0m"
+curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/frontend.zip &>> /tmp/frontend.log
+cd /usr/share/nginx/html  &>> /tmp/frontend.log
+
+echo -e "\e[31m Extracting Frontend \e[0m"
+unzip /tmp/frontend.zip  &>> /tmp/frontend.log
+
+echo -e "\e[31m starting Frontend \e[0m"
+systemctl restart nginx  &>> /tmp/frontend.log
+
 echo "** Frontend installation  Is complated **"
