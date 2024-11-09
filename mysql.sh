@@ -34,4 +34,4 @@ COLOR Configuring  $COMPONENT Root password
 mysql_secure_installation --set-root-pass ExpenseApp@1  &>> LOG
 stat $?
 
-echo -e "\e\t ** $COMPONENT  Installation Complated **"
+echo -e "\e\t ** $COMPONENT Installation Complated **"
