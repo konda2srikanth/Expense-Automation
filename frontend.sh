@@ -22,7 +22,11 @@ if [ "$ID" -ne 0 ]; then
 fi
 
 if [ -f proxy.conf] ; then
+    COLOR Proxy File Presense
+    stat $?
+else
     echo -e "\e[31m proxy.conf is not present ,ensure  you supply it \e[0m"
+    exit 1
 fi
 
 COLOR Installing Nginx
