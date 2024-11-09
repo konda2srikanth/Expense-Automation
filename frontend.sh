@@ -29,7 +29,7 @@ COLOR Performing a Cleanup
 stat $?
 
 COLOR Downloading $COMPONENT
-curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/$COMPONENT.zip &>> $LOG
+curl -o /tmp/frontend.zip https://expense-web-app.s3.amazonaws.com/$COMPONENT.zip  &>> $LOG
 stat $?
 
 cd /usr/share/nginx/html 
