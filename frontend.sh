@@ -58,4 +58,4 @@ COLOR starting $COMPONENT
 systemctl restart nginx  &>> LOG
 stat $?
 
-echo "** COMPONENT installation  Is complated **"
+echo "** $COMPONENT installation  Is complated **"
