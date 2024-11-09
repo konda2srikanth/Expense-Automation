@@ -29,7 +29,7 @@ stat $?
 mkdir /app   &>> LOG
 stat $?
 COLOR Downloading  $COMPONENT
-curl -o /tmp/backend.zip https://expense-web-app.s3.amazonaws.com/backend.zip   
+curl -o /tmp/backend.zip https://expense-web-app.s3.amazonaws.com/backend.zip   &>> LOG 
 stat $?
 COLOR configuring  backend service
 cp backend.service  /etc/systemd/system/backend.service  
@@ -48,7 +48,7 @@ chmod -R 775 /app
 chown -R expense:expense /app
 stat $?
 COLOR Installing mysql client 
-dnf install mysql-server -y
+dnf install mysql-server -y  &>> LOG
 stat $?
 COLOR   Injecting Scheme To Myssql  DB
 mysql -h 3.86.60.41 -uroot -pExpenseApp@1 < /app/schema/backend.sql 
